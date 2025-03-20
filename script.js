@@ -1,10 +1,10 @@
-//AnimaÁ„o da barra superior
+//Anima√ß√£o da barra superior
 const topBar = document.querySelector('.top-bar');
 
 window.addEventListener('scroll', function() {
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-    // Define uma dist√¢ncia do topo para exibir a barra (ajuste conforme necess√°rio)
+    // Define uma dist√É¬¢ncia do topo para exibir a barra (ajuste conforme necess√É¬°rio)
     if (scrollTop < 100) {
         topBar.style.top = '0'; // Exibe a barra
     } else {
@@ -23,17 +23,17 @@ function typeWriter() {
     if (index < title.length) {
         titleElement.innerHTML += title.charAt(index);
         index++;
-        setTimeout(typeWriter, 200); // Velocidade da digitaÁ„o (100ms por letra)
+        setTimeout(typeWriter, 200); // Velocidade da digita√ß√£o (100ms por letra)
     } else {
         titleElement.style.borderRight = "none"; // Remove o cursor no final
     }
 }
 
-typeWriter(); // Inicia a animaÁ„o
+typeWriter(); // Inicia a anima√ß√£o
 
-//AlteraÁ„o dos n˙meros ao apertar os 3 botıes
+//Altera√ß√£o dos n√∫meros ao apertar os 3 bot√µes
 document.addEventListener('DOMContentLoaded', function() {
-    // Seleciona os botıes de r·dio
+    // Seleciona os bot√µes de r√°dio
     const btnGarantia = document.getElementById('btnradio1');
     const btnPessoal = document.getElementById('btnradio2');
     const btnConsignado = document.getElementById('btnradio3');
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Seleciona o input da taxa de juros
     const inputJuros = document.querySelector('.input-group.mb-3 input[type="text"]');
 
-    // Adiciona os eventos de clique aos botıes
+    // Adiciona os eventos de clique aos bot√µes
     btnGarantia.addEventListener('click', function() {
         inputJuros.value = '1,50';
     });
@@ -55,9 +55,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-//Bot„o dropdown da taxa de juros
+//Bot√£o dropdown da taxa de juros
 document.addEventListener('DOMContentLoaded', function() {
-    // Seleciona o bot„o dropdown
+    // Seleciona o bot√£o dropdown
     const dropdownButton = document.getElementById('dropdownButton');
     
     // Seleciona todos os itens do dropdown
@@ -66,23 +66,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Adiciona um evento de clique para cada item do dropdown
     dropdownItems.forEach(item => {
         item.addEventListener('click', function(event) {
-            event.preventDefault(); // Evita o comportamento padr„o do link
+            event.preventDefault(); // Evita o comportamento padr√£o do link
 
-            // ObtÈm o valor do item clicado (Mensal ou Anual)
+            // Obt√©m o valor do item clicado (Mensal ou Anual)
             const selectedValue = item.getAttribute('data-value');
 
             // Verifica se o valor foi capturado corretamente
             if (selectedValue) {
-                // Atualiza o texto do bot„o com o valor selecionado
+                // Atualiza o texto do bot√£o com o valor selecionado
                 dropdownButton.textContent = `% ${selectedValue}`;
             } else {
-                console.error('Valor n„o encontrado no item do dropdown.');
+                console.error('Valor n√£o encontrado no item do dropdown.');
             }
         });
     });
 });
 
-//Botıes de + e -
+//Bot√µes de + e -
 document.querySelector('.minus').addEventListener('click', function() {
     let input = document.querySelector('.parcelas input');
     let value = parseInt(input.value);
@@ -100,7 +100,7 @@ document.querySelector('.plus').addEventListener('click', function() {
 //Input de inserir valor
 document.getElementById('valorInput').addEventListener('input', function(event) {
     let input = event.target;
-    let valor = input.value.replace(/[^0-9]/g, ''); // Remove tudo que n„o È n˙mero
+    let valor = input.value.replace(/[^0-9]/g, ''); // Remove tudo que n√£o √© n√∫mero
 
     // Se o valor estiver vazio, define como "0,00"
     if (valor === '') {
@@ -108,7 +108,7 @@ document.getElementById('valorInput').addEventListener('input', function(event) 
         return;
     }
 
-    // Garante que o valor tenha no m·ximo 2 casas decimais
+    // Garante que o valor tenha no m√°ximo 2 casas decimais
     let valorFormatado = (Number(valor) / 100).toLocaleString('pt-BR', {
         style: 'currency',
         currency: 'BRL',
@@ -120,11 +120,9 @@ document.getElementById('valorInput').addEventListener('input', function(event) 
     input.value = valorFormatado;
 });
 
-// ... (cÛdigo anterior mantido inalterado)
-
-// Bot„o Simular - C·lculo do EmprÈstimo
+// Bot√£o Simular - C√°lculo do Empr√©stimo
 document.querySelector('.simu').addEventListener('click', function() {
-    // Captura dos valores do formul·rio
+    // Captura dos valores do formul√°rio
     const valorEmprestimo = parseFloat(
         document.getElementById('valorInput').value
         .replace(/[^\d,]/g, '')
@@ -144,12 +142,12 @@ document.querySelector('.simu').addEventListener('click', function() {
         document.querySelector('.parcelas input').value
     ) || 1;
 
-    // C·lculo da taxa mensal efetiva
+    // C√°lculo da taxa mensal efetiva
     let i = tipoTaxa === 'anual' 
            ? (taxaJuros / 12) / 100 
            : taxaJuros / 100;
 
-    // C·lculo da prestaÁ„o
+    // C√°lculo da presta√ß√£o
     let prestacao;
     if (i === 0) {
         prestacao = valorEmprestimo / parcelas;
@@ -158,17 +156,17 @@ document.querySelector('.simu').addEventListener('click', function() {
         prestacao = valorEmprestimo * (i * fator) / (fator - 1);
     }
 
-    // C·lculos adicionais
+    // C√°lculos adicionais
     const totalPago = prestacao * parcelas;
     const juros = totalPago - valorEmprestimo;
 
-    // FormataÁ„o dos valores
+    // Formata√ß√£o dos valores
     const formatoBRL = new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: 'BRL'
     });
 
-    // AtualizaÁ„o dos resultados
+    // Atualiza√ß√£o dos resultados
     const resultados = document.querySelectorAll('.custom-grid .custom-col');
     resultados[3].textContent = formatoBRL.format(prestacao);
     resultados[5].textContent = formatoBRL.format(totalPago);
